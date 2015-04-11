@@ -1,5 +1,5 @@
-function Screen() {
+/*function Screen() {
 	
-}
+}*/
 
-module.exports = Screen;
+//module.exports = Screen;

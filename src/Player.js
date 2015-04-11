@@ -1,5 +1,10 @@
 function Player() {
-	this.yPos = 20;
+	
+	this.xPos = 50;
+	
+	this.yMinPos = 50;
+	this.yMaxPos = 100;
+	
 	this.status = 0;
 }
 
@@ -11,4 +16,4 @@ Player.prototype.duck = function() {
 	
 };
 
-module.exports = Player;
+//module.exports = Player;
