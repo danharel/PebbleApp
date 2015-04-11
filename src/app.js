@@ -34,16 +34,16 @@ window.on('click', 'up', function() {
 
 //ducking
 window.on('click', 'down', function() {
-  //var pos = testRect.position();
-  var size  = testRect.size();
+  var pos = new Vector2(55, 120);
+  var size  = new Vector2(20, 20);
   //size.y += 20;
   //pos.y -= 50;
-  
+
   //var size2 = testRect.size;
   //size2.y -= 50;
-  
-  testRect.animate('size', new Vector2(40, 20), 100).queue(function(next){
-  testRect.animate('size', new Vector2(20, 40), 100);
+
+  testRect.animate({'position': pos, 'size': size}, 100).queue(function(next){
+  testRect.animate({'position':new Vector2(55, 100), 'size':new Vector2(20, 40)}, 100);
   next();
   });
 } );
