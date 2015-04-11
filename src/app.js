@@ -11,15 +11,26 @@ var Vector2 = require('vector2');
 //var player = require('Player.js');
 //var screen = require('Screen.js');
 
-console.log("lol");
+var window = new UI.Window();
+var x = 100;
 
-var main = new UI.Window({
-	title: 'Pebble Run',
-	fullscreen: true
-});
+  var testRect = new UI.Rect({
+    position: new Vector2(x,x),
+    size: new Vector2(20,40)
+  });
 
-main.on('click', 'select', function() {
-	console.log('Adam is a goober');
+window.add(testRect);
+window.show();
+
+//var pos = Rect.position();
+//pos.y -= 50;
+
+
+window.on('click', 'select', function() {
+	var pos = testRect.position();
+  pos.y -= 50;
+  
+  testRect.animate('position', pos, 1000);
 });
 
 //var x = 0;
