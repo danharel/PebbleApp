@@ -21,13 +21,8 @@ var window = new UI.Window();
 
 //Moving ground
 var grounds = [];
-for (var i = 0; i < 5; i++) {
-  var ground = new UI.Image({
-    position: new Vector2(28*i, 140),
-    size: new Vector2(28,28),
-    image: 'images/ground.png'
-  });
-  window.add(ground);  
+for (var i = 0; i < 7; i++) {
+  addGround();
 }
 
 //Bottom spikes, try a loop to generate them?
@@ -76,6 +71,32 @@ window.on('click', 'down', function() {
 
 setInterval(function() {
   for (var i = 0; i < grounds.length; i++) {
-    //grounds[i].animate('position', new Vector2(grounds[i].x - 10, grounds[i].y), 1);
+    var curr = grounds[i];
+    var x = curr.position().x;
+    var y = curr.position().y;
+    curr.animate('position', new Vector2(x - 10, y), 1);
+    if (curr.position().x < -1*curr.size().x) {
+      removeFirstGround();
+      addGround();
+    }
   }
 }, 1000);
+
+function removeFirstGround() {
+  grounds[0].remove();
+  grounds.splice(0,1);
+}
+
+function addGround() {
+  var x = 0;
+  if (grounds.length != 0)
+    x = grounds[grounds.length-1].position().x + grounds[0].size().x;
+  var ground = new UI.Image({
+    position: new Vector2(x, 140),
+    size: new Vector2(28,28),
+    image: 'images/ground.png'
+  });
+  window.add(ground);
+  grounds.push(ground);
+  console.log(ground);
+}
