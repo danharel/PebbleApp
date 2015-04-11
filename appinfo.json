@@ -4,7 +4,7 @@
         ""
     ],
     "companyName": "hareldan95@gmail.com",
-    "longName": "Lol",
+    "longName": "Pebble Run",
     "projectType": "pebblejs",
     "resources": {
         "media": [
@@ -30,11 +30,6 @@
                 "type": "font"
             },
             {
-                "file": "images/Lucas.png",
-                "name": "IMAGES_LUCAS_PNG",
-                "type": "png"
-            },
-            {
                 "file": "images/ground.png",
                 "name": "IMAGES_GROUND_PNG",
                 "type": "png"
@@ -56,7 +51,7 @@
             }
         ]
     },
-    "shortName": "Lol",
+    "shortName": "Pebble Run",
     "uuid": "39943aca-ec45-48f3-bb84-0dc54aa442b8",
     "versionCode": 1,
     "versionLabel": "1.0",

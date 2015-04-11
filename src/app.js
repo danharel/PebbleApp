@@ -18,6 +18,7 @@ var window = new UI.Window();
 
 //140 V
 
+//Moving ground
 var grounds = [];
 for (var i = 0; i < 5; i++) {
   var ground = new UI.Image({
@@ -27,6 +28,14 @@ for (var i = 0; i < 5; i++) {
   });
   window.add(ground);  
 }
+
+//Bottom spikes, try a loop to generate them?
+var botSpike = new UI.Image({
+  position: new Vector2(80,81),
+  size: new Vector2(23,59),
+  image: 'images/bot.png'
+});
+window.add(botSpike);
            
 window.add(testRect);
 window.show();
@@ -37,12 +46,12 @@ window.on('click', 'up', function() {
   pos.y -= 50;
   
   var pos2 = testRect.position();
-  pos2.y += 50;
+  pos2.y += 50; 
   
   //testRect.animate('position', pos, 1000);
   
-  testRect.animate('position', new Vector2(55,20), 100).queue(function(next){
-  testRect.animate('position', new Vector2 (55,100), 100);
+  testRect.animate('position', new Vector2(55,30), 500).queue(function(next){
+  testRect.animate('position', new Vector2 (55,100), 500);
   next();
 }); 
 
