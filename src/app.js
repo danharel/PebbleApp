@@ -5,6 +5,9 @@
 
 var UI = require('ui');
 var Vector2 = require('vector2');
+var Light = require('ui/light');
+
+Light.on();
 
 var window = new UI.Window();
 
@@ -63,6 +66,6 @@ window.on('click', 'down', function() {
 
 setInterval(function() {
   for (var i = 0; i < grounds.length; i++) {
-    grounds[i].animate('position', new Vector2(grounds[i].x - 10, grounds[i].y), 1);
+    //grounds[i].animate('position', new Vector2(grounds[i].x - 10, grounds[i].y), 1);
   }
 }, 1000);
