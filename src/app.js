@@ -11,9 +11,10 @@ Light.on();
 
 var window = new UI.Window();
 
-  var testRect = new UI.Rect({
+  var Lucas = new UI.Image({
     position: new Vector2(55,100),
-    size: new Vector2(20,40)
+    size: new Vector2(20,40),
+    image: 'images/Lucas.png'
   });
 
 //140 V
@@ -31,27 +32,27 @@ for (var i = 0; i < 5; i++) {
 
 //Bottom spikes, try a loop to generate them?
 var botSpike = new UI.Image({
-  position: new Vector2(80,81),
-  size: new Vector2(23,59),
-  image: 'images/bot.png'
+  position: new Vector2(80,100),
+  size: new Vector2(20,40),
+  image: 'images/bot2.png'
 });
 window.add(botSpike);
            
-window.add(testRect);
+window.add(Lucas);
 window.show();
 
 //jumping up
 window.on('click', 'up', function() {
-	var pos = testRect.position();
+	var pos = Lucas.position();
   pos.y -= 50;
   
-  var pos2 = testRect.position();
+  var pos2 = Lucas.position();
   pos2.y += 50; 
   
   //testRect.animate('position', pos, 1000);
   
-  testRect.animate('position', new Vector2(55,30), 500).queue(function(next){
-  testRect.animate('position', new Vector2 (55,100), 500);
+  Lucas.animate('position', new Vector2(55,35), 500).queue(function(next){
+  Lucas.animate('position', new Vector2 (55,100), 500);
   next();
 }); 
 
@@ -67,8 +68,8 @@ window.on('click', 'down', function() {
   //var size2 = testRect.size;
   //size2.y -= 50;
 
-  testRect.animate({'position': pos, 'size': size}, 100).queue(function(next){
-  testRect.animate({'position':new Vector2(55, 100), 'size':new Vector2(20, 40)}, 100);
+  Lucas.animate({'position': pos, 'size': size}, 100).queue(function(next){
+  Lucas.animate({'position':new Vector2(55, 100), 'size':new Vector2(20, 40)}, 100);
   next();
   });
 } );
