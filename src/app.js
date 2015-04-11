@@ -9,7 +9,7 @@ var Vector2 = require('vector2');
 var ajax = require('ajax');
 
 var player = require('Player.js');
-//var screen = require('Screen.js');
+var screen = require('Screen.js');
 
 console.log("lol");
 
