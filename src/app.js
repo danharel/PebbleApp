@@ -1,75 +1,51 @@
 /**
- * Welcome to Pebble.js!
- *
- * This is where you write your app.
+ *Bitcamp 2015
+ *By: Dan Harel, Marlena Lui, Angela Bair, Adam Liang
  */
-//https://cloudpebble.net/ide/project/172772#
+
 var UI = require('ui');
 var Vector2 = require('vector2');
-var ajax = require('ajax');
+var window = new UI.Window();
 
-console.log("lol");
-
-var main = new UI.Card({
-  title: 'Pebble.js',
-  icon: 'images/menu_icon.png',
-  subtitle: 'Hello World!',
-  body: 'Press any button.'
-});
-
-main.show();
-
-main.on('click', 'up', function(e) {
-  var menu = new UI.Menu({
-    sections: [{
-      items: [{
-        title: 'Pebble.js',
-        icon: 'images/menu_icon.png',
-        subtitle: 'Can do Menus'
-      }, {
-        title: 'Second Item',
-        subtitle: 'Subtitle Text'
-      }]
-    }]
+  var testRect = new UI.Rect({
+    position: new Vector2(55,100),
+    size: new Vector2(20,40)
   });
-  menu.on('select', function(e) {
-    console.log('Selected item #' + e.itemIndex + ' of section #' + e.sectionIndex);
-    console.log('The item is titled "' + e.item.title + '"');
+
+window.add(testRect);
+window.show();
+
+//jumping up
+window.on('click', 'up', function() {
+	var pos = testRect.position();
+  pos.y -= 50;
+  
+  var pos2 = testRect.position();
+  pos2.y += 50;
+  
+  //testRect.animate('position', pos, 1000);
+  
+  testRect.animate('position', new Vector2(55,20), 100).queue(function(next){
+  testRect.animate('position', new Vector2 (55,100), 100);
+  next();
+}); 
+
+});
+
+//ducking
+window.on('click', 'down', function() {
+  //var pos = testRect.position();
+  var size  = testRect.size();
+  //size.y += 20;
+  //pos.y -= 50;
+  
+  //var size2 = testRect.size;
+  //size2.y -= 50;
+  
+  testRect.animate('size', new Vector2(40, 20), 100).queue(function(next){
+  testRect.animate('size', new Vector2(20, 40), 100);
+  next();
   });
-  menu.show();
-});
+} );
 
-main.on('click', 'select', function(e) {
-  ajax(
-  {
-    url: 'http://api.theysaidso.com/qod.json',
-    type: 'json'
-  },
-  function(data, status, request) {
-    console.log('Quote of the day is: ' + data.contents.quote);
-  },
-  function(error, status, request) {
-    console.log('The ajax request failed: ' + error);
-  }
-);
-  var wind = new UI.Window();
-  var textfield = new UI.Text({
-    position: new Vector2(0, 50),
-    size: new Vector2(144, 30),
-    font: 'gothic-24-bold',
-    //text: 'Text Anywhere!',
-    textAlign: 'center'
-  });
-  wind.add(textfield);
-  wind.show();
-});
 
-main.on('click', 'down', function(e) {
-  var card = new UI.Card();
-  card.title('A Card');
-  card.subtitle('Is a Window');
-  card.body('The simplest window type in Pebble.js.');
-  card.show();
-});
-
-//check if you see this thanks - 4/11
