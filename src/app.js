@@ -5,6 +5,7 @@
 
 var UI = require('ui');
 var Vector2 = require('vector2');
+
 var window = new UI.Window();
 
   var testRect = new UI.Rect({
@@ -12,6 +13,18 @@ var window = new UI.Window();
     size: new Vector2(20,40)
   });
 
+//140 V
+
+var grounds = [];
+for (var i = 0; i < 5; i++) {
+  var ground = new UI.Image({
+    position: new Vector2(28*i, 140),
+    size: new Vector2(28,28),
+    image: 'images/ground.png'
+  });
+  window.add(ground);  
+}
+           
 window.add(testRect);
 window.show();
 
@@ -48,4 +61,8 @@ window.on('click', 'down', function() {
   });
 } );
 
-
+setInterval(function() {
+  for (var i = 0; i < grounds.length; i++) {
+    grounds[i].animate('position', new Vector2(grounds[i].x - 10, grounds[i].y), 1);
+  }
+}, 1000);
