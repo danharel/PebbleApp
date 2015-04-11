@@ -71,3 +71,5 @@ main.on('click', 'down', function(e) {
   card.body('The simplest window type in Pebble.js.');
   card.show();
 });
+
+//check if you see this thanks - 4/11
