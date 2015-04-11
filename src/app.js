@@ -12,7 +12,7 @@ Light.on();
 var window = new UI.Window();
 
   var Lucas = new UI.Image({
-    position: new Vector2(55,100),
+    position: new Vector2(30,100),
     size: new Vector2(20,40),
     image: 'images/Lucas.png'
   });
@@ -46,8 +46,8 @@ window.on('click', 'up', function() {
   
   //testRect.animate('position', pos, 1000);
   
-  Lucas.animate('position', new Vector2(55,35), 500).queue(function(next){
-  Lucas.animate('position', new Vector2 (55,100), 500);
+  Lucas.animate('position', new Vector2(30,35), 500).queue(function(next){
+  Lucas.animate('position', new Vector2 (30,100), 500);
   next();
 }); 
 
@@ -64,7 +64,7 @@ window.on('click', 'down', function() {
   //size2.y -= 50;
 
   Lucas.animate({'position': pos, 'size': size}, 100).queue(function(next){
-  Lucas.animate({'position':new Vector2(55, 100), 'size':new Vector2(20, 40)}, 100);
+  Lucas.animate({'position':new Vector2(30, 100), 'size':new Vector2(20, 40)}, 100);
   next();
   });
 } );
