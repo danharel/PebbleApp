@@ -8,18 +8,29 @@ var UI = require('ui');
 var Vector2 = require('vector2');
 var ajax = require('ajax');
 
+var player = require('Player.js');
+//var screen = require('Screen.js');
+
 console.log("lol");
 
-var main = new UI.Card({
-  title: 'Pebble.js',
-  icon: 'images/menu_icon.png',
-  subtitle: 'Hello World!',
-  body: 'Press any button.'
-});
+var x = 20;
+setTimeout(function() {
+	var main = new UI.Window({
+		title:'Pebble Run',
+		fullscreen: true
+	});
+	
+	main.add(new UI.Rect({
+		position: new Vector2(x,x),
+		size: new Vector2(20, 40)
+	}));
 
-main.show();
+	main.show();
+	
+	x++;
+}, 1000/60);
 
-main.on('click', 'up', function(e) {
+/*main.on('click', 'up', function(e) {
   var menu = new UI.Menu({
     sections: [{
       items: [{
@@ -57,7 +68,7 @@ main.on('click', 'select', function(e) {
     position: new Vector2(0, 50),
     size: new Vector2(144, 30),
     font: 'gothic-24-bold',
-    //text: 'Text Anywhere!',
+    text: 'Text Anywhere!',
     textAlign: 'center'
   });
   wind.add(textfield);
@@ -70,6 +81,6 @@ main.on('click', 'down', function(e) {
   card.subtitle('Is a Window');
   card.body('The simplest window type in Pebble.js.');
   card.show();
-});
+});*/
 
 //check if you see this thanks - 4/11
