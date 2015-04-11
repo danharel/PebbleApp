@@ -28,6 +28,26 @@
                 "file": "fonts/UbuntuMono-Regular.ttf",
                 "name": "MONO_FONT_14",
                 "type": "font"
+            },
+            {
+                "file": "images/bkg.png",
+                "name": "IMAGES_BKG_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/bot.png",
+                "name": "IMAGES_BOT_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/ground.png",
+                "name": "IMAGES_GROUND_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/top.png",
+                "name": "IMAGES_TOP_PNG",
+                "type": "png"
             }
         ]
     },
