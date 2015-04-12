@@ -136,14 +136,13 @@ function addGround() {
 function collision() {
     var lucasPos = Lucas.position();
     var obstPos = botSpikes.position();
-    
-    return (
+  
+      return (
       (lucasPos.x < (obstPos.x + botSpikes.size().x)) &&
-      ((lucasPos.x + Lucas.size().x) > obstPos.x) &&
-      (lucasPos.y < (obstPos.y + botSpikes.size().y)) &&
-      ((lucasPos.y + Lucas.size().y) > obstPos.y)
+      //((lucasPos.x + Lucas.size().x) > obstPos.x) &&
+      (lucasPos.y < (obstPos.y + botSpikes.size().y)) //&&
+      //((lucasPos.y + Lucas.size().y) > obstPos.y)
       );
-      
 }
 
 function deinit() {
@@ -157,7 +156,7 @@ function lose() {
   deinit();
   console.log("LOST THE MEMES");
   var losingScreen = new UI.Card({
-    title: "You are a goober!",
+    title: "You lost! Click to try again!",
     body: "Your score: " + score
   });
   
