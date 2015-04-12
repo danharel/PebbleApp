@@ -18,11 +18,11 @@ var background = new UI.Image({
 });
 window.add(background);
 
-  var Lucas = new UI.Image({
+var Lucas = new UI.Image({
     position: new Vector2(30,100),
     size: new Vector2(20,40),
     image: 'images/Lucas.png'
-  });
+});
 
 //140 V
 
@@ -33,12 +33,23 @@ for (var i = 0; i < 7; i++) {
 }
 
 //Bottom spikes, try a loop to generate them?
+//add initial botspike
 var botSpike = new UI.Image({
   position: new Vector2(80,100),
   size: new Vector2(20,40),
   image: 'images/bot2.png'
 });
 window.add(botSpike);
+
+//function to add more botspikes
+var addBotSpike = function(){
+  var botSpike = new UI.Image({
+  position: new Vector2(100,100),
+  size: new Vector2(20,40),
+  image: 'images/bot2.png'
+  });
+  window.add(botSpike);
+};
            
 window.add(Lucas);
 window.show();
@@ -76,12 +87,24 @@ window.on('click', 'down', function() {
   });
 } );
 
+//moving bottom spikes
 
 setInterval(function(){
-  var z = botSpike.position().x-20;
-  botSpike.animate("position", new Vector2(z, botSpike.position().y), 1);
+  var bot = botSpike;
+  var z = bot.position().x;
+  z = bot.position().x;
+  //if it will go off the scren, remove and make a new one
+  if((bot.position().x -20) < 0){
+    bot.remove();
+    bot = new addBotSpike();
+    z = 100;
+  }
+  console.log("didnt get here1");
+  bot.animate("position", new Vector2(z - 20, bot.position().y), 1);
+  console.log("didnt get here2");
 }, 1000);
 
+//moving ground
 setInterval(function() {
   for (var i = 0; i < grounds.length; i++) {
     var curr = grounds[i];
@@ -95,11 +118,13 @@ setInterval(function() {
   }
 }, 1000);
 
+//helper function for moving ground
 function removeFirstGround() {
   grounds[0].remove();
   grounds.splice(0,1);
 }
 
+//helper function for moving ground
 function addGround() {
   var x = 0;
   if (grounds.length !== 0)
