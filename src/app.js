@@ -9,81 +9,93 @@ var Light = require('ui/light');
 
 Light.on();
 
-var NUM_GROUNDS = 7;
+var NUM_GROUNDS = 15;
 
-var window = new UI.Window();
+var score;
+var window;
+var background;
+var botSpikes;
+var Lucas;
+var grounds;
+var lost;
 
-var background = new UI.Image({
-  position: new Vector2(0,68),
-  size: new Vector2(144, 168),
-  image: 'images/bkg.png'
-});
-window.add(background);
+init();
 
-var botSpikes = new UI.Image({
-    position: new Vector2(80, 100),
-    size: new Vector2(20,40),
-    image: 'images/bot2.png'
-});
-
-window.add(botSpikes);
-
-var Lucas = new UI.Image({
-    position: new Vector2(30,100),
-    size: new Vector2(20,40),
-    image: 'images/Lucas.png'
-});
-
-//Moving ground
-var grounds = [];
-for (var i = 0; i < NUM_GROUNDS; i++) {
-  addGround();
-}
-           
-window.add(Lucas);
-window.show();
-
-//jumping up
-window.on('click', 'up', function() {
-	var pos = Lucas.position();
-  pos.y -= 50;
+function init() {
+  lost = false;
   
-  var pos2 = Lucas.position();
-  pos2.y += 50; 
+  score = 0;
+  window = new UI.Window();
   
-  //testRect.animate('position', pos, 1000);
-  
-  Lucas.animate('position', new Vector2(30,35), 500).queue(function(next){
-  Lucas.animate('position', new Vector2 (30,100), 500);
-  next();
-}); 
-
-});
-
-//ducking
-window.on('click', 'down', function() {
-  var pos = new Vector2(55, 120);
-  var size  = new Vector2(20, 20);
-
-  Lucas.animate({'position': pos, 'size': size}, 100).queue(function(next){
-  Lucas.animate({'position':new Vector2(30, 100), 'size':new Vector2(20, 40)}, 100);
-  next();
+  background = new UI.Image({
+    position: new Vector2(0,68),
+    size: new Vector2(144, 168),
+    image: 'images/bkg.png'
   });
-} );
+  window.add(background);
+
+  botSpikes = new UI.Image({
+      position: new Vector2(200, 100),
+      size: new Vector2(20,40),
+      image: 'images/bot2.png'
+  });
+  window.add(botSpikes);
+
+  Lucas = new UI.Image({
+      position: new Vector2(30,100),
+      size: new Vector2(20,40),
+      image: 'images/Lucas.png'
+  });
+  window.add(Lucas);
+
+  grounds = [];
+  for (var i = 0; i < NUM_GROUNDS; i++) {
+    addGround();
+  }
+  
+  window.show();
+
+  //jumping up
+  window.on('click', 'up', function() {
+    var pos = Lucas.position();
+    pos.y -= 50;
+  
+    var pos2 = Lucas.position();
+    pos2.y += 50; 
+  
+    //testRect.animate('position', pos, 1000);
+  
+    Lucas.animate('position', new Vector2(30,15), 500).queue(function(next){
+      Lucas.animate('position', new Vector2 (30,100), 500);
+      next();
+    }); 
+  });
+
+  //ducking
+  window.on('click', 'down', function() {
+    var pos = new Vector2(55, 120);
+    var size  = new Vector2(20, 20);
+
+    Lucas.animate({'position': pos, 'size': size}, 100).queue(function(next){
+      Lucas.animate({'position':new Vector2(30, 100), 'size':new Vector2(20, 40)}, 100);
+      next();
+    });
+  });
+}
 
 //moving spike
-setInterval(function() {
+var spikeInterval = setInterval(function() {
   if (botSpikes.position().x < -1* botSpikes.size().x)
     botSpikes.animate('position', new Vector2(botSpikes.position().x+200, botSpikes.position().y), 1);
   else
     botSpikes.animate('position', new Vector2(botSpikes.position().x-20, botSpikes.position().y), 1);
-  if (collision()) {
+  if (collision() && !lost) {
     lose();
   }
 }, 1000/3);
 
 //moving ground
-setInterval(function() {
+var groundInterval = setInterval(function() {
   for (var i = 0; i < grounds.length; i++) {
     var curr = grounds[i];
     var x = curr.position().x;
@@ -96,6 +108,10 @@ setInterval(function() {
         addGround();
   }
 }, 1000/3);
+
+var scoreInterval = setInterval(function() {
+  score++;
+}, 1);
 
 //helper function for moving ground
 function removeFirstGround() {
@@ -130,6 +146,25 @@ function collision() {
       
 }
 
+function deinit() {
+  /*clearInterval(spikeInterval);
+  clearInterval(groundInterval);
+  clearInterval(scoreInteral);*/
+  lost = true;
+}
+
 function lose() {
+  deinit();
   console.log("LOST THE MEMES");
+  var losingScreen = new UI.Card({
+    title: "You are a goober!",
+    body: "Your score: " + score
+  });
+  
+  losingScreen.show();
+  
+  losingScreen.on('click', function() {
+    console.log("Goober");
+    init();
+  });
 }
