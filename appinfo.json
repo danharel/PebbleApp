@@ -29,38 +29,19 @@
                 "type": "font"
             },
             {
-                "file": "images/nessSheet.png",
-                "name": "IMAGES_NESSSHEET_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/bot2.png",
-                "name": "IMAGES_BOT2_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/top2.png",
-                "name": "IMAGES_TOP2_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/Lucas.png",
-                "name": "IMAGES_LUCAS_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/top.png",
-                "name": "IMAGES_TOP_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/bot.png",
-                "name": "IMAGES_BOT_PNG",
-                "type": "png"
-            },
-            {
                 "file": "images/bkg.png",
                 "name": "IMAGES_BKG_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/nessy.png",
+                "name": "IMAGES_NESSY_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/chicken.png",
+                "menuIcon": true,
+                "name": "IMAGES_CHICKEN_PNG",
                 "type": "png"
             },
             {
@@ -69,9 +50,33 @@
                 "type": "png"
             },
             {
-                "file": "images/chicken.png",
-                "menuIcon": true,
-                "name": "IMAGES_CHICKEN_PNG",
+                "file": "images/bot.png",
+                "name": "IMAGES_BOT_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/top.png",
+                "name": "IMAGES_TOP_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/Lucas.png",
+                "name": "IMAGES_LUCAS_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/top2.png",
+                "name": "IMAGES_TOP2_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/bot2.png",
+                "name": "IMAGES_BOT2_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/nessSheet.png",
+                "name": "IMAGES_NESSSHEET_PNG",
                 "type": "png"
             }
         ]
