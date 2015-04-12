@@ -11,6 +11,13 @@ Light.on();
 
 var window = new UI.Window();
 
+var background = new UI.Image({
+  position: new Vector2(0,68),
+  size: new Vector2(144, 168),
+  image: 'images/bkg.png'
+});
+window.add(background);
+
   var Lucas = new UI.Image({
     position: new Vector2(30,100),
     size: new Vector2(20,40),
