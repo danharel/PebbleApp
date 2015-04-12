@@ -3,7 +3,7 @@
     "capabilities": [
         ""
     ],
-    "companyName": "hareldan95@gmail.com",
+    "companyName": "Masked Men",
     "longName": "Pebble Run",
     "projectType": "pebblejs",
     "resources": {
@@ -29,39 +29,8 @@
                 "type": "font"
             },
             {
-                "file": "images/chicken.png",
-                "menuIcon": true,
-                "name": "IMAGES_CHICKEN_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/ground.png",
-                "name": "IMAGES_GROUND_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/bkg.png",
-                "name": "IMAGES_BKG_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/bot.png",
-                "name": "IMAGES_BOT_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/top.png",
-                "name": "IMAGES_TOP_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/Lucas.png",
-                "name": "IMAGES_LUCAS_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/top2.png",
-                "name": "IMAGES_TOP2_PNG",
+                "file": "images/nessSheet.png",
+                "name": "IMAGES_NESSSHEET_PNG",
                 "type": "png"
             },
             {
@@ -70,8 +39,39 @@
                 "type": "png"
             },
             {
-                "file": "images/nessSheet.png",
-                "name": "IMAGES_NESSSHEET_PNG",
+                "file": "images/top2.png",
+                "name": "IMAGES_TOP2_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/Lucas.png",
+                "name": "IMAGES_LUCAS_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/top.png",
+                "name": "IMAGES_TOP_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/bot.png",
+                "name": "IMAGES_BOT_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/bkg.png",
+                "name": "IMAGES_BKG_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/ground.png",
+                "name": "IMAGES_GROUND_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/chicken.png",
+                "menuIcon": true,
+                "name": "IMAGES_CHICKEN_PNG",
                 "type": "png"
             }
         ]

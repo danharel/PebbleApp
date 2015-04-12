@@ -9,6 +9,8 @@ var Light = require('ui/light');
 
 Light.on();
 
+var NUM_GROUNDS = 7
+
 var window = new UI.Window();
 
 var background = new UI.Image({
@@ -18,38 +20,24 @@ var background = new UI.Image({
 });
 window.add(background);
 
+var botSpikes = new UI.Image({
+    position: new Vector2(80, 100),
+    size: new Vector2(20,40),
+    image: 'images/bot2.png'
+});
+window.add(botSpikes);
+
 var Lucas = new UI.Image({
     position: new Vector2(30,100),
     size: new Vector2(20,40),
     image: 'images/Lucas.png'
 });
 
-//140 V
-
 //Moving ground
 var grounds = [];
-for (var i = 0; i < 7; i++) {
+for (var i = 0; i < NUM_GROUNDS; i++) {
   addGround();
 }
-
-//Bottom spikes, try a loop to generate them?
-//add initial botspike
-var botSpike = new UI.Image({
-  position: new Vector2(80,100),
-  size: new Vector2(20,40),
-  image: 'images/bot2.png'
-});
-window.add(botSpike);
-
-//function to add more botspikes
-var addBotSpike = function(){
-  var botSpike = new UI.Image({
-  position: new Vector2(100,100),
-  size: new Vector2(20,40),
-  image: 'images/bot2.png'
-  });
-  window.add(botSpike);
-};
            
 window.add(Lucas);
 window.show();
@@ -75,11 +63,6 @@ window.on('click', 'up', function() {
 window.on('click', 'down', function() {
   var pos = new Vector2(55, 120);
   var size  = new Vector2(20, 20);
-  //size.y += 20;
-  //pos.y -= 50;
-
-  //var size2 = testRect.size;
-  //size2.y -= 50;
 
   Lucas.animate({'position': pos, 'size': size}, 100).queue(function(next){
   Lucas.animate({'position':new Vector2(30, 100), 'size':new Vector2(20, 40)}, 100);
@@ -87,22 +70,13 @@ window.on('click', 'down', function() {
   });
 } );
 
-//moving bottom spikes
-
-setInterval(function(){
-  var bot = botSpike;
-  var z = bot.position().x;
-  z = bot.position().x;
-  //if it will go off the scren, remove and make a new one
-  if((bot.position().x -20) < 0){
-    bot.remove();
-    bot = new addBotSpike();
-    z = 100;
-  }
-  console.log("didnt get here1");
-  bot.animate("position", new Vector2(z - 20, bot.position().y), 1);
-  console.log("didnt get here2");
-}, 1000);
+setInterval(function() {
+  console.log(botSpikes.position().x + "," + botSpikes.position().y);
+  if (botSpikes.position().x < -1* botSpikes.size().x)
+    botSpikes.animate('position', new Vector2(botSpikes.position().x+200, botSpikes.position().y), 1);
+  else
+    botSpikes.animate('position', new Vector2(botSpikes.position().x-20, botSpikes.position().y), 1);
+}, 1000/3);
 
 //moving ground
 setInterval(function() {
@@ -110,13 +84,14 @@ setInterval(function() {
     var curr = grounds[i];
     var x = curr.position().x;
     var y = curr.position().y;
-    curr.animate('position', new Vector2(x - 10, y), 1);
+    curr.animate('position', new Vector2(x - 20, y), 1);
     if (curr.position().x < -1*curr.size().x) {
       removeFirstGround();
-      addGround();
+      while (grounds.length < NUM_GROUNDS)
+        addGround();
     }
   }
-}, 1000);
+}, 1000/3);
 
 //helper function for moving ground
 function removeFirstGround() {
