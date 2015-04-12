@@ -76,6 +76,12 @@ window.on('click', 'down', function() {
   });
 } );
 
+
+setInterval(function(){
+  var z = botSpike.position().x--;
+  botSpike.animate("position", new Vector2(z, botSpike.position().y), 1);
+}, 1000);
+
 setInterval(function() {
   for (var i = 0; i < grounds.length; i++) {
     var curr = grounds[i];
@@ -96,7 +102,7 @@ function removeFirstGround() {
 
 function addGround() {
   var x = 0;
-  if (grounds.length != 0)
+  if (grounds.length !== 0)
     x = grounds[grounds.length-1].position().x + grounds[0].size().x;
   var ground = new UI.Image({
     position: new Vector2(x, 140),
@@ -107,3 +113,4 @@ function addGround() {
   grounds.push(ground);
   console.log(ground);
 }
+
