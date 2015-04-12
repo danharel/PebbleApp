@@ -78,7 +78,7 @@ window.on('click', 'down', function() {
 
 
 setInterval(function(){
-  var z = botSpike.position().x--;
+  var z = botSpike.position().x-20;
   botSpike.animate("position", new Vector2(z, botSpike.position().y), 1);
 }, 1000);
 
