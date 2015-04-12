@@ -9,7 +9,7 @@ var Light = require('ui/light');
 
 Light.on();
 
-var NUM_GROUNDS = 7
+var NUM_GROUNDS = 7;
 
 var window = new UI.Window();
 
@@ -25,6 +25,7 @@ var botSpikes = new UI.Image({
     size: new Vector2(20,40),
     image: 'images/bot2.png'
 });
+
 window.add(botSpikes);
 
 var Lucas = new UI.Image({
@@ -70,12 +71,15 @@ window.on('click', 'down', function() {
   });
 } );
 
+//moving spike
 setInterval(function() {
-  console.log(botSpikes.position().x + "," + botSpikes.position().y);
   if (botSpikes.position().x < -1* botSpikes.size().x)
     botSpikes.animate('position', new Vector2(botSpikes.position().x+200, botSpikes.position().y), 1);
   else
     botSpikes.animate('position', new Vector2(botSpikes.position().x-20, botSpikes.position().y), 1);
+  if (collision()) {
+    lose();
+  }
 }, 1000/3);
 
 //moving ground
@@ -87,9 +91,9 @@ setInterval(function() {
     curr.animate('position', new Vector2(x - 20, y), 1);
     if (curr.position().x < -1*curr.size().x) {
       removeFirstGround();
-      while (grounds.length < NUM_GROUNDS)
-        addGround();
     }
+    while (grounds.length < NUM_GROUNDS)
+        addGround();
   }
 }, 1000/3);
 
@@ -111,6 +115,21 @@ function addGround() {
   });
   window.add(ground);
   grounds.push(ground);
-  console.log(ground);
 }
 
+function collision() {
+    var lucasPos = Lucas.position();
+    var obstPos = botSpikes.position();
+    
+    return (
+      (lucasPos.x < (obstPos.x + botSpikes.size().x)) &&
+      ((lucasPos.x + Lucas.size().x) > obstPos.x) &&
+      (lucasPos.y < (obstPos.y + botSpikes.size().y)) &&
+      ((lucasPos.y + Lucas.size().y) > obstPos.y)
+      );
+      
+}
+
+function lose() {
+  console.log("LOST THE MEMES");
+}
