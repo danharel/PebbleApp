@@ -6,12 +6,15 @@
 var UI = require('ui');
 var Vector2 = require('vector2');
 var Light = require('ui/light');
+var Settings = require('settings');
 
 Light.on();
 
 var NUM_GROUNDS = 15;
+var HIGH_SCORE_KEY = 'high_score';
 
 var score;
+var scoreBox;
 var window;
 var background;
 var botSpikes;
@@ -26,6 +29,14 @@ function init() {
   
   score = 0;
   window = new UI.Window();
+  
+  scoreBox = new UI.Text({
+    position: new Vector2(0,0),
+    size: new Vector2(144,168),
+    font: 'gothic-8-bold',
+    text: score
+  });
+  window.add(scoreBox);
   
   background = new UI.Image({
     position: new Vector2(0,68),
@@ -110,8 +121,9 @@ var groundInterval = setInterval(function() {
 }, 1000/3);
 
 var scoreInterval = setInterval(function() {
-  score++;
-}, 1);
+  score+=1;
+  scoreBox.text = score;
+}, 10);
 
 //helper function for moving ground
 function removeFirstGround() {
@@ -143,9 +155,18 @@ function deinit() {
 function lose() {
   deinit();
   console.log("LOST THE MEMES");
+  
+  var highScore = localStorage.getItem(HIGH_SCORE_KEY);
+  console.log("High score: " + highScore);
+  if (highScore === null || score > highScore) {
+    highScore = score;
+    console.log("New high score: " + highScore);
+    localStorage.setItem(HIGH_SCORE_KEY, highScore);
+  }
+  
   var losingScreen = new UI.Card({
-    title: "You are a goober!",
-    body: "Your score: " + score
+    title: "You lost!",
+    body: "Your score:\n" + score + "\nHigh score:\n" + highScore
   });
   
   losingScreen.show();
@@ -160,21 +181,7 @@ function collision() {
     var lucasPos = Lucas.position();
     var obstPos = botSpikes.position();
   
-  
-  return isInside(obstPos.x, obstPos.y, lucasPos.x, lucasPos.y, lucasPos.x + Lucas.size().x, lucasPos.y + Lucas.size().y);
-  
-    /*if(((lucasPos.y + Lucas.size().y) < obstPos.y) && ((lucasPos.x + Lucas.size().x) > obstPos.x)){
-      return false;
-    }
-    else{
-    return (
-      (lucasPos.x < (obstPos.x + botSpikes.size().x)) &&
-      ((lucasPos.x + Lucas.size().x) > obstPos.x) &&
-      (lucasPos.y < (obstPos.y )) + botSpikes.size().y &&
-      ((lucasPos.y + Lucas.size().y) > obstPos.y)
-      );
-    }*/
-      
+    return isInside(obstPos.x, obstPos.y, lucasPos.x, lucasPos.y, lucasPos.x + Lucas.size().x, lucasPos.y + Lucas.size().y);
 }
 
 function isInside(x, y, z1, z2, z3, z4) {
@@ -183,10 +190,10 @@ function isInside(x, y, z1, z2, z3, z4) {
     var y1 = Math.min(z2, z4);
     var y2 = Math.max(z2, z4);
     if ((x1 <= x ) && ( x <= x2) && (y1 <= y) && (y <= y2)) {
-        console.log(x1 + "," + x + "," + x2);
-        console.log(y1 + "," + y + "," + y2);
+        //console.log(x1 + "," + x + "," + x2);
+        //console.log(y1 + "," + y + "," + y2);
         return true;
     } else {
         return false;
-    };
-};
+    }
+}
