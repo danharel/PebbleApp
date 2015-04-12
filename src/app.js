@@ -133,18 +133,6 @@ function addGround() {
   grounds.push(ground);
 }
 
-function collision() {
-    var lucasPos = Lucas.position();
-    var obstPos = botSpikes.position();
-  
-      return (
-      (lucasPos.x < (obstPos.x + botSpikes.size().x)) &&
-      //((lucasPos.x + Lucas.size().x) > obstPos.x) &&
-      (lucasPos.y < (obstPos.y + botSpikes.size().y)) //&&
-      //((lucasPos.y + Lucas.size().y) > obstPos.y)
-      );
-}
-
 function deinit() {
   /*clearInterval(spikeInterval);
   clearInterval(groundInterval);
@@ -156,7 +144,7 @@ function lose() {
   deinit();
   console.log("LOST THE MEMES");
   var losingScreen = new UI.Card({
-    title: "You lost! Click to try again!",
+    title: "You are a goober!",
     body: "Your score: " + score
   });
   
@@ -167,3 +155,38 @@ function lose() {
     init();
   });
 }
+
+function collision() {
+    var lucasPos = Lucas.position();
+    var obstPos = botSpikes.position();
+  
+  
+  return isInside(obstPos.x, obstPos.y, lucasPos.x, lucasPos.y, lucasPos.x + Lucas.size().x, lucasPos.y + Lucas.size().y);
+  
+    /*if(((lucasPos.y + Lucas.size().y) < obstPos.y) && ((lucasPos.x + Lucas.size().x) > obstPos.x)){
+      return false;
+    }
+    else{
+    return (
+      (lucasPos.x < (obstPos.x + botSpikes.size().x)) &&
+      ((lucasPos.x + Lucas.size().x) > obstPos.x) &&
+      (lucasPos.y < (obstPos.y )) + botSpikes.size().y &&
+      ((lucasPos.y + Lucas.size().y) > obstPos.y)
+      );
+    }*/
+      
+}
+
+function isInside(x, y, z1, z2, z3, z4) {
+    var x1 = Math.min(z1, z3);
+    var x2 = Math.max(z1, z3);
+    var y1 = Math.min(z2, z4);
+    var y2 = Math.max(z2, z4);
+    if ((x1 <= x ) && ( x <= x2) && (y1 <= y) && (y <= y2)) {
+        console.log(x1 + "," + x + "," + x2);
+        console.log(y1 + "," + y + "," + y2);
+        return true;
+    } else {
+        return false;
+    };
+};
