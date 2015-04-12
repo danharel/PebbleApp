@@ -6,7 +6,6 @@
 var UI = require('ui');
 var Vector2 = require('vector2');
 var Light = require('ui/light');
-var Settings = require('settings');
 
 Light.on();
 
@@ -45,11 +44,12 @@ function init() {
   });
   window.add(background);
 
-  botSpikes = new UI.Image({
+  /*botSpikes = new UI.Image({
       position: new Vector2(200, 100),
       size: new Vector2(20,40),
       image: 'images/bot2.png'
-  });
+  });*/
+  botSpikes = newObstacle();
   window.add(botSpikes);
 
   Lucas = new UI.Image({
@@ -143,6 +143,28 @@ function addGround() {
   });
   window.add(ground);
   grounds.push(ground);
+}
+
+function newObstacle() {
+  var rand = Math.random();
+  var img;
+  var y;
+  var size;
+  if (rand < 0.0/3) {
+    img = 'images/bot2.png';
+    y = 100;
+    size = new Vector2(20,40);
+  }
+  else {
+    img = 'images/top.png';
+    y = 20;
+    size = new Vector2(25, 65);
+  }
+  return new UI.Image({
+    position: new Vector2(200, y),
+    size: size,
+    image: img
+  });
 }
 
 function deinit() {
